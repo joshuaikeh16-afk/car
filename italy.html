@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITALY MACHINES | Pure Passion</title>
+    <style>
+        :root {
+            --ita-green: #008C45;
+            --ita-white: #F4F5F0;
+            --ita-red: #CD212A;
+            --dark-carbon: #1a1a1a;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            /* Vertical stripes feel more like the actual Italian Flag */
+            background: linear-gradient(
+                to right,
+                var(--ita-green) 0%,
+                var(--ita-green) 33.33%,
+                var(--ita-white) 33.33%,
+                var(--ita-white) 66.66%,
+                var(--ita-red) 66.66%,
+                var(--ita-red) 100%
+            );
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            max-width: 950px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-top: 8px solid var(--ita-green);
+            border-bottom: 8px solid var(--ita-red);
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--dark-carbon);
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-style: italic;
+            line-height: 1.6;
+            color: #444;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        li {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--ita-red);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* --- Luxury Table Styling --- */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--dark-carbon);
+            color: white;
+            padding: 20px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+            font-weight: bold;
+            color: var(--ita-red);
+        }
+
+        /* Hover Effect: The "Rosso Corsa" Glow */
+        td:hover {
+            background-color: #fff5f5;
+            color: var(--ita-red);
+            cursor: default;
+        }
+
+        .spec-label {
+            font-weight: bold;
+            background-color: #f9f9f9 !important;
+            text-align: left;
+            width: 20%;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>ITALY MACHINES</h1>
+        <p>"The engine is the heart of an airplane, but the pilot is its soul." — *Enzo Ferrari*</p>
+        
+        <ul>
+            <li><strong>Artistic Design</strong>: Sculpted lines that prioritize emotion over utility.</li>
+            <li><strong>Raw Passion</strong>: An acoustic symphony from high-revving V12 engines.</li>
+            <li><strong>Performance</strong>: Blistering track times met with unparalleled style.</li>
+        </ul>
+
+        <table>
+            <tr>
+                <th class="spec-label">MODEL</th>
+                <th>LaFerrari</th>
+                <th>Aventador SVJ</th>
+                <th>Ghibli Trofeo</th>
+            </tr>
+            <tr>
+                <td class="spec-label">Top Speed</td>
+                <td>350+ km/h</td>
+                <td>352 km/h</td>
+                <td>326 km/h</td>
+            </tr>
+            <tr>
+                <td class="spec-label">Engine</td>
+                <td>6.3L V12 Hybrid</td>
+                <td>6.5L V12</td>
+                <td>3.8L V8</td>
+            </tr>
+            <tr>
+                <td class="spec-label">Drivetrain</td>
+                <td>RWD</td>
+                <td>AWD</td>
+                <td>RWD</td>
+            </tr>
+            <tr>
+                <td class="spec-label">0-100 km/h</td>
+                <td>2.9s</td>
+                <td>2.8s</td>
+                <td>4.3s</td>
+            </tr>
+            <tr>
+                <td class="spec-label">Price (Est.)</td>
+                <td>$3,500,000+</td>
+                <td>$517,000</td>
+                <td>$120,000</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

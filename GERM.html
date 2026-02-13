@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GERMANY MACHINES | Engineering Excellence</title>
+    <style>
+        :root {
+            --de-black: #000000;
+            --de-red: #DD0000;
+            --de-gold: #FFCE00;
+            --glass: rgba(255, 255, 255, 0.9);
+            --accent: #007AFF;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(
+                to bottom,
+                var(--de-black) 0%,
+                var(--de-black) 33.3%,
+                var(--de-red) 33.3%,
+                var(--de-red) 66.6%,
+                var(--de-gold) 66.6%,
+                var(--de-gold) 100%
+            );
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            max-width: 1000px;
+            margin: 40px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            letter-spacing: 4px;
+            font-weight: 900;
+            margin-top: 0;
+            text-transform: uppercase;
+            border-bottom: 4px solid var(--de-black);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid var(--de-red);
+        }
+
+        /* --- Upgraded Table Styling --- */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden; /* Rounds the table corners */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: var(--de-black);
+            color: white;
+            padding: 18px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Hover interaction */
+        tr:hover td {
+            background-color: #f0f7ff;
+            color: var(--accent);
+            font-weight: bold;
+            transform: scale(1.01);
+        }
+
+        .highlight {
+            color: var(--de-red);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>GERMANY MACHINES</h1>
+    <p>The magic of German cars refers to a unique combination of <strong>precision engineering</strong>, high-performance capability, and luxurious craftsmanship.</p>
+    
+    <ul>
+        <li><strong>Ingenieurskunst</strong>: Meticulous attention to detail and durability.</li>
+        <li><strong>Innovation</strong>: Leading the world in safety and driver assistance.</li>
+    </ul>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Spec</th>
+                    <th>BMW M4 CSL</th>
+                    <th>AMG ONE</th>
+                    <th>Audi R8 V10</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Top Speed</strong></td>
+                    <td>307 km/h</td>
+                    <td>352 km/h</td>
+                    <td>331 km/h</td>
+                </tr>
+                <tr>
+                    <td><strong>Engine</strong></td>
+                    <td>3.0L Inline-6</td>
+                    <td>1.6L V6 Hybrid</td>
+                    <td>5.2L V10</td>
+                </tr>
+                <tr>
+                    <td><strong>Drivetrain</strong></td>
+                    <td>RWD</td>
+                    <td>AWD</td>
+                    <td>AWD</td>
+                </tr>
+                <tr>
+                    <td><strong>0-100 km/h</strong></td>
+                    <td class="highlight">3.7s</td>
+                    <td class="highlight">2.9s</td>
+                    <td class="highlight">3.1s</td>
+                </tr>
+                <tr>
+                    <td><strong>MSRP</strong></td>
+                    <td>$140,000</td>
+                    <td>$2,700,000</td>
+                    <td>$210,000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

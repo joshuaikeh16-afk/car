@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Verification | Bike Shop</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1c2c 0%, #4a192c 100%);
+            background-attachment: fixed;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h1 { color: #00d4ff; margin-bottom: 10px; }
+        
+        p { font-size: 1.1rem; color: #e0e0e0; }
+
+        h2 { font-size: 1rem; margin-top: 30px; color: #ccc; }
+
+        .btn-group {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: #00d4ff;
+            color: #1a1c2c;
+        }
+
+        .btn-primary:hover {
+            background: white;
+            transform: scale(1.03);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            border-color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        a { text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Dear User,</h1>
+        <p>You must be 18 or older to access this specific content.</p>
+        
+        <h2>Explore our available collections:</h2>
+        
+        <div class="btn-group">
+            <a href="bikes.html"><button class="btn-primary">View All Bikes</button></a>
+            <a href="signin.html"><button class="btn-secondary">Go Back to Sign In</button></a>
+        </div>
+    </div>
+
+</body>
+</html>
