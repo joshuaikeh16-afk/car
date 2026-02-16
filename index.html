@@ -117,11 +117,11 @@
 <body>
 
 <div class="container">
-    <h1>CAR HAVEN 🏎️</h1>
+    <h1>FUN HAVEN 🏎️</h1>
     <h2>Sign In to Explore</h2>
     
     <div class="age">
-        <h3>Driver Credentials</h3>
+        <h3>User Credentials</h3>
         <form id="ageform"> 
             <input type="text" id="name" placeholder="Driver Name" required>
             <input type="number" id="age" placeholder="Age" required>
@@ -137,7 +137,7 @@ document.getElementById("ageform").addEventListener("submit", function(e) {
     const age = parseInt(document.getElementById("age").value);
     
     if (age >= 18 && age <= 60) {
-        window.location.href = "learn.html";
+        window.location.href = "choose.html";
     } else if (age < 18) {
         alert("Hold your horses, " + name + "! You must be at least 18 to enter the garage.");
             window.location.href = "under18.html";

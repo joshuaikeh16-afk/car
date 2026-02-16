@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Genie's Guess</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #2c003e, #000);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .genie-img {
+            width: 200px;
+            filter: drop-shadow(0 0 15px #ffcc00);
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #ffcc00;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #ffcc00;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #ffcc00;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        .character-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin: 30px 0;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
+        }
+
+        .answers-summary {
+            text-align: left;
+            margin: 30px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .answers-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .answers-summary li {
+            background: rgba(255, 204, 0, 0.1);
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 3px solid #ffcc00;
+            text-align: left;
+        }
+
+        .answer-text {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+            font-size: 1.2rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-play-again {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-play-again:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .btn-home {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-home:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU_CaHt9h7v3LMBkT2V1x2Q3tM3peqgtP3bM939Yai7d71S1gsv3okYgHV1ZzD" class="genie-img" alt="Genie">
+
+    <div class="result-box">
+        <h1>The Genie Has Spoken! 🔮</h1>
+        
+        <p>Based on your answers, I believe your character is:</p>
+        
+        <div class="character-name" id="character-guess">Loading...</div>
+
+        <div class="answers-summary" id="answers-container">
+            <!-- Answers will be displayed here -->
+        </div>
+
+        <div class="btn-container">
+            <button class="btn btn-play-again" onclick="playAgain()">Play Again</button>
+            <a href="choose.html" class="btn btn-home">Back Home</a>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+    <script>
+        // Display the guessed character
+        document.addEventListener('DOMContentLoaded', function() {
+            const guessedCharacter = guessCharacter();
+            document.getElementById('character-guess').textContent = guessedCharacter;
+            
+            // Display answers summary
+            const answers = getAnswers();
+            let summaryHTML = '<h2>Your Answers:</h2><ul>';
+            
+            for (const [question, answer] of Object.entries(answers)) {
+                summaryHTML += `<li><strong>${question}</strong><br><span class="answer-text">→ ${answer}</span></li>`;
+            }
+            
+            summaryHTML += '</ul>';
+            document.getElementById('answers-container').innerHTML = summaryHTML;
+        });
+
+        // Play again function
+        function playAgain() {
+            clearAnswers();
+            window.location.href = 'pick.html';
+        }
+    </script>
+
+</body>
+</html>

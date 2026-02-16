@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Genie's Guess</title>
+    <style>
+        body {
+            background: radial-gradient(circle, #2c003e, #000);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .genie-img {
+            width: 200px;
+            filter: drop-shadow(0 0 15px #ffcc00);
+            margin-bottom: 20px;
+        }
+
+        .question-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid #ffcc00;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .answer-btn {
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+            transition: 0.3s;
+            font-size: 1.2rem;
+            min-width: 100px;
+        }
+
+        .yes { background: #4CAF50; color: white; }
+        .no { background: #f44336; color: white; }
+
+        .answer-btn:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU_CaHt9h7v3LMBkT2V1x2Q3tM3peqgtP3bM939Yai7d71S1gsv3okYgHV1ZzD" class="genie-img" alt="Genie">
+
+    <div class="question-box">
+        <h1>Does your character cover their eyes?</h1>
+        
+        <div class="btn-container">
+            <a href="game4.html" class="answer-btn yes">YES</a>
+            <a href="game4.html" class="answer-btn no">NO</a>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
