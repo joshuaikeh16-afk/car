@@ -27,7 +27,7 @@ const characters = {
     'calm-nokill-noeyes-nosmell-nobored-food-training-nodark': 'Goku',
     
     // Naruto - calm, kill without touch (tailed beast), food addict, training, becomes dark
-    'calm-kill-noeyes-nosmell-nobored-food-training-dark': 'Naruto',
+    'calm-nokill-noeyes-nosmell-nobored-food-training-dark': 'Naruto',
     
     // Light - calm, intelligent, kills without touch (notebook), becomes dark
     'calm-kill-noeyes-nosmell-nobored-nofood-notraining-dark': 'Light',

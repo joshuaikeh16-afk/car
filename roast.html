@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nigerian Roast Machine 🔥</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      max-width: 620px;
+      margin: 2rem auto;
+      padding: 1rem;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #ff4d4d;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    #roast-area {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-height: 140px;
+      margin: 1.5rem 0;
+      font-size: 1.25rem;
+      border: 1px solid #333;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    button {
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    #roast-btn {
+      background: #ff4d4d;
+      color: white;
+    }
+    #roast-btn:hover {
+      background: #ff6666;
+      transform: translateY(-2px);
+    }
+    #clear-btn {
+      background: #444;
+      color: #ddd;
+    }
+    #clear-btn:hover {
+      background: #555;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      color: #777;
+      font-size: 0.9rem;
+    }
+    .back-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 1rem 0;
+}
+.back-btn:hover {
+  background: #555;
+}
+  </style>
+</head>
+<body>
+
+  <h1>🔥 Nigerian Roast Machine v1 🔥</h1>
+
+  <div id="roast-area">Press the button... make e no be say you dey fear small roast 😏</div>
+
+  <div class="buttons">
+    <button id="roast-btn">Roast Me Now 😈</button>
+    <button id="clear-btn">Clear</button>
+    <a href="choose.html"><button class="back-btn">← Back to Previous Page</button></a>
+  </div>
+
+  <script>
+    // ──────────────────────────────────────────────
+    // Your roast ingredients (19 each — feel free to edit)
+    // ──────────────────────────────────────────────
+
+    const openers = [
+      "Bros, ", "My guy, ", "Chai see this one, ", "Ehen, ", "See mumu, ",
+      "Guy man, ", "Aunty, ", "Wahala boy, ", "This one wey, ", "Na wa for you, ",
+      "Babe, ", "Chairman, ", "Suffer head, ", "Big head, ", "Small pikin, ",
+      "You this person, ", "Jesus take the wheel because ", "Omo, ", "Abeg, "
+    ];
+
+    const roasts = [
+      "your destiny still dey load since secondary school",
+      "even your shadow dey dodge you when light go",
+      "your barber suppose collect life sentence",
+      "you dey form big boy but na indomie full your account",
+      "your mates dey do NYSC you still dey do ND1 clearance",
+      "your data finish before your pride",
+      "even JAMB give you second chance, life no gree you",
+      "your CV na fiction novel since 2010",
+      "you dey beg for Awoof like say na oxygen",
+      "your playlist na only 'To be continued' songs",
+      "your mirror dey avoid eye contact with you",
+      "you enter bus last last, na you dey shout 'Owa o!' first",
+      "your ex still dey use your matter as motivation to do better",
+      "your bank alert na only debit SMS since Buhari",
+      "you dey form vegan but na Agege bread + sardine full your fridge",
+      "your prayer point na 'God bless my hustle' since secondary",
+      "even your OTP dey delay pass your life progress",
+      "your group chat dey mute you before you type 'lol'",
+      "your mates dey travel you dey travel to kitchen"
+    ];
+
+    const closers = [
+      "...na wa o", "...God abeg oo", "...we move sha", "...but e go better... maybe",
+      "...delete this app and repent", "...abeg shift make person breathe",
+      "...chai pity dey catch me small", "...but who send you message?",
+      "...pack well abeg", "...na so e be sha", "...repent before 2027",
+      "...we no fit laugh you finish", "...go and sin no more (jare)",
+      "...e go be ✌️", "...next caller please", "...your village people no dey rest",
+      "...I hail o", "...continue dey play", "...na you sabi"
+    ];
+
+    // ──────────────────────────────────────────────
+    // DOM elements
+    // ──────────────────────────────────────────────
+
+    const roastArea = document.getElementById("roast-area");
+    const roastBtn  = document.getElementById("roast-btn");
+    const clearBtn  = document.getElementById("clear-btn");
+
+    // ──────────────────────────────────────────────
+    // Roast function
+    // ──────────────────────────────────────────────
+
+    function getRandomRoast() {
+      const opener    = openers[Math.floor(Math.random() * openers.length)];
+      const roastPart = roasts[Math.floor(Math.random() * roasts.length)];
+      const closer    = closers[Math.floor(Math.random() * closers.length)];
+
+      return opener + roastPart + closer;
+    }
+
+    // ──────────────────────────────────────────────
+    // Event listeners
+    // ──────────────────────────────────────────────
+
+    roastBtn.addEventListener("click", () => {
+      const roastText = getRandomRoast();
+      roastArea.textContent = roastText;
+      roastArea.style.color = "#ffeb3b";           // temporary highlight
+      setTimeout(() => {
+        roastArea.style.color = "#f0f0f0";         // back to normal
+      }, 1200);
+    });
+
+    clearBtn.addEventListener("click", () => {
+      roastArea.textContent = "Waiting for your next roast session... 😏";
+    });
+
+    // Optional: roast on Enter key press anywhere on page
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && !e.target.matches("input, textarea, button")) {
+        e.preventDefault();
+        roastBtn.click();
+      }
+    });
+
+  </script>
+</body>
+</html>

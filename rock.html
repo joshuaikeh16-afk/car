@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rock Paper Scissors – FIXED 🔥</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem 1.5rem;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    h1 {
+      color: #4caf50;
+      margin: 0.5rem 0;
+    }
+    .container {
+      background: #111;
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid #222;
+      text-align: center;
+    }
+    #result {
+      font-size: 1.4rem;
+      min-height: 80px;
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: #1a1a1a;
+      border-radius: 10px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      min-width: 160px;
+    }
+    .rock    { background: #2196f3; color: white; }
+    .paper   { background: #ff9800; color: white; }
+    .scissors { background: #f44336; color: white; }
+    #reset-btn { 
+      background: #9c27b0; color: white; min-width: auto; padding: 0.8rem 1.5rem; font-size: 1rem; 
+    }
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+    #score {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      color: #bbb;
+    }
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 0.7rem 1.4rem;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      border: 1px solid #444;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 100;
+      backdrop-filter: blur(6px);
+    }
+    .back-btn:hover { background: rgba(0,0,0,0.95); }
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    #debug {
+      background: #2a2a2a;
+      padding: 0.5rem;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      color: #ffeb3b;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="choose.html"><button class="back-btn">← Back</button></a>
+
+  <header>
+    <h1>Rock Paper Scissors </h1>
+    <p style="color:#aaa;">Best of luck 😎</p>
+  </header>
+
+  <div class="container">
+    <div id="result">Choose your weapon! (Computer will pick randomly)</div>
+
+    <div class="buttons">
+      <button class="rock"    onclick="play('rock')">🪨 Rock</button>
+      <button class="paper"   onclick="play('paper')">📄 Paper</button>
+      <button class="scissors" onclick="play('scissors')">✂️ Scissors</button>
+    </div>
+
+    <div class="buttons">
+      <button id="reset-btn" onclick="resetScore()">Reset Score</button>
+    </div>
+
+    <div id="score">
+      You: <span id="player-score">0</span>  –  Computer: <span id="computer-score">0</span>
+    </div>
+
+    <div id="debug" style="display:none;">Debug hidden</div>
+  </div>
+
+  <script>
+    let playerScore   = 0;
+    let computerScore = 0;
+    const debugDiv    = document.getElementById('debug');
+
+    function play(playerChoice) {
+      // EXPLICIT RANDOM — 0=rock, 1=paper, 2=scissors
+      const rand = Math.floor(Math.random() * 3);
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[rand];
+
+      // DEBUG LOG (check F12 console too)
+      console.log('Random #:', rand, '| Computer:', computerChoice);
+      debugDiv.style.display = 'block';
+      debugDiv.textContent = `Debug: Random=${rand} → ${computerChoice}`;
+
+      let message = "";
+      let color   = "#e0e0e0";
+
+      if (playerChoice === computerChoice) {
+        message = `🤝 Tie! Both chose ${playerChoice.toUpperCase()}`;
+        color   = "#ffeb3b";
+      }
+      else if (
+        (playerChoice === 'rock'     && computerChoice === 'scissors') ||
+        (playerChoice === 'paper'    && computerChoice === 'rock')     ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        message = `🎉 You win! ${playerChoice.toUpperCase()} beats ${computerChoice.toUpperCase()}`;
+        playerScore++;
+        color   = "#4caf50";
+      }
+      else {
+        message = `💀 Computer wins! ${computerChoice.toUpperCase()} beats ${playerChoice.toUpperCase()}`;
+        computerScore++;
+        color   = "#f44336";
+      }
+
+      document.getElementById('result').innerHTML = message;
+      document.getElementById('result').style.color = color;
+      document.getElementById('player-score').textContent   = playerScore;
+      document.getElementById('computer-score').textContent = computerScore;
+    }
+
+    function resetScore() {
+      playerScore = 0;
+      computerScore = 0;
+      document.getElementById('player-score').textContent = 0;
+      document.getElementById('computer-score').textContent = 0;
+      document.getElementById('result').textContent = "Score reset! Choose again.";
+      debugDiv.style.display = 'none';
+      console.clear();
+    }
+  </script>
+</body>
+</html>
