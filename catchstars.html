@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Catch the Stars</title>
+<style>
+  body { 
+    margin:0; 
+    overflow:hidden; 
+    background: linear-gradient(to bottom, #0d1b2a, #1b263b); 
+    font-family: Arial, sans-serif; 
+    color: white; 
+    text-align: center; 
+  }
+  h1 { margin: 20px; font-size: 2.5rem; color: #ffd700; text-shadow: 0 0 15px #ffd700; }
+  #score { font-size: 2rem; margin: 10px; }
+  #game { 
+    position: relative; 
+    width: 100vw; 
+    height: 80vh; 
+    overflow: hidden; 
+  }
+  .star {
+    position: absolute;
+    font-size: 3rem;
+    color: #ffd700;
+    text-shadow: 0 0 15px #ffd700;
+    pointer-events: all;
+    cursor: pointer;
+    user-select: none;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(100vh); }
+  }
+  button { 
+    padding: 15px 40px; 
+    font-size: 1.5rem; 
+    background: #ffd700; 
+    border: none; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    margin: 20px; 
+    box-shadow: 0 5px 15px rgba(255,215,0,0.5);
+  }
+  .menu-btn {
+    background: #0288d1;
+  }
+  .menu-btn:hover { background: #0277bd; }
+</style>
+</head>
+<body>
+<h1>Catch the Falling Stars!</h1>
+<div id="score">Score: 0</div>
+<div id="game"></div>
+<button onclick="startGame()">Start / Restart</button>
+<button class="menu-btn" onclick="window.location.href='index.html'">← Return to Menu</button>
+
+<script>
+  let score = 0;
+  const game = document.getElementById('game');
+  const scoreDisplay = document.getElementById('score');
+
+  function createStar() {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.textContent = '✨';
+    star.style.left = Math.random() * 90 + 'vw';
+    star.style.animationDuration = (Math.random() * 4 + 4) + 's';
+    star.onclick = () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      star.remove();
+    };
+    game.appendChild(star);
+
+    setTimeout(() => {
+      if (star.parentNode) star.remove();
+    }, 8000);
+  }
+
+  function startGame() {
+    score = 0;
+    scoreDisplay.textContent = "Score: 0";
+    game.innerHTML = "";
+    setInterval(createStar, 1200);
+  }
+</script>
+</body>
+</html>

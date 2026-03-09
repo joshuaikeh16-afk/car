@@ -1,59 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Portal</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        .nav-container {
-            margin-top: 30px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 15px 25px;
-            margin: 10px;
-            text-decoration: none;
-            color: white;
-            background-color: #007bff;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        /* Special styling for the new game button */
-        .btn-game {
-            background-color: #28a745;
-        }
-        .btn-game:hover {
-            background-color: #218838;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Portal • Naija Tech Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0a0015;
+      --glass: rgba(20, 10, 45, 0.65);
+      --accent: #ff2e63;
+      --accent-glow: rgba(255, 46, 99, 0.5);
+      --secondary: #7b2cff;
+      --text: #f0e6ff;
+      --text-dim: #b0a0d0;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 40px 20px;
+      background-image: 
+        radial-gradient(circle at 10% 80%, #ff2e6322 0%, transparent 50%),
+        radial-gradient(circle at 90% 20%, #7b2cff22 0%, transparent 50%);
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      text-align: center;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, #ff2e63, #7b2cff, #00ff9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(255,46,99,0.4);
+      letter-spacing: -1px;
+    }
+
+    p.subtitle {
+      text-align: center;
+      font-size: 1.3rem;
+      color: var(--text-dim);
+      margin-bottom: 50px;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6),
+                  0 0 40px var(--accent-glow);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,46,99,0.08), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card i {
+      font-size: 3.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+      transition: transform 0.4s;
+    }
+
+    .card:hover i {
+      transform: scale(1.15) rotate(10deg);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--text-dim);
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, var(--accent), #ff6b6b);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(255,46,99,0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255,46,99,0.6);
+    }
+
+    .btn-game {
+      background: linear-gradient(135deg, #28a745, #34d058);
+      box-shadow: 0 8px 25px rgba(40,167,69,0.4);
+    }
+
+    .btn-game:hover {
+      box-shadow: 0 15px 40px rgba(40,167,69,0.6);
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: float 25s infinite linear;
+      opacity: 0.4;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0.2); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.7; }
+      100% { transform: translateY(-20vh) scale(0.8); opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.4rem; }
+      .cards-container { gap: 20px; padding: 0 15px; }
+      .card { padding: 24px 18px; }
+    }
+  </style>
 </head>
 <body>
 
-    <h1>Welcome, Dear User</h1>
-    <p>Please select a section to proceed.</p>
-    
-    <div class="nav-container">
-        <a href="akinator.html" class="btn">AKI 🤔</a>
-        <a href="calculator.html" class="btn">CALC 🧮</a>
-        <a href="learn.html" class="btn">Car 🏎️</a>
-        <a href="tictactoe.html" class="btn btn-game">Tic-Tac-Toe ❌⭕</a>
-        <a href="roast.html" class="btn">ROAST 😏</a>
-        <a href="rock.html" class="btn">R / P / S🪨✂️📄</a>
+  <!-- Floating particles -->
+  <div class="particles" id="particles"></div>
+
+  <h1>Welcome, Dear User</h1>
+  <p class="subtitle">Pick a section that catches your vibe 🚀</p>
+
+  <div class="cards-container">
+    <div class="card">
+      <i class="fas fa-brain"></i>
+      <h3>AKINATOR</h3>
+      <p>Let me guess who you're thinking of 🤔</p>
+      <a href="akinator.html" class="btn">Play AKI</a>
     </div>
 
-    <h3>Pick anything that piques your interest.</h3>
+    <div class="card">
+      <i class="fas fa-calculator"></i>
+      <h3>CALCULATOR</h3>
+      <p>Quick math, no stress 🧮</p>
+      <a href="calculator.html" class="btn">Open Calc</a>
+    </div>
 
+    <div class="card">
+      <i class="fas fa-car-side"></i>
+      <h3>Car Zone</h3>
+      <p>Explore rides & speed 🏎️</p>
+      <a href="learn.html" class="btn">Check Cars</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-gamepad"></i>
+      <h3>Tic-Tac-Toe</h3>
+      <p>Play with bot or friend! ❌⭕</p>
+      <a href="tttchoose.html" class="btn btn-game">Choose Mode</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-fire"></i>
+      <h3>ROAST</h3>
+      <p>Get roasted or roast back 😏</p>
+      <a href="roast.html" class="btn">Get Roasted</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-hand-rock"></i>
+      <h3>Rock Paper Scissors</h3>
+      <p>Classic showdown 🪨✂️📄</p>
+      <a href="rockpaperscissors.html" class="btn">Play RPS</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-comment-dots"></i>
+      <h3>CHAT</h3>
+      <p>Vibe with the bot 🗣️</p>
+      <a href="chatbox.html" class="btn">Start Chat</a>
+    </div>
+
+    <!-- Mini-games added -->
+    <div class="card">
+      <i class="fas fa-dice"></i>
+      <h3>Guess the Number</h3>
+      <p>Can you guess my secret number? 🔢</p>
+      <a href="guessnumber.html" class="btn">Play Now</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-memory"></i>
+      <h3>Memory Match</h3>
+      <p>Flip cards & match pairs 🧠</p>
+      <a href="memory.html" class="btn">Play Memory</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-star"></i>
+      <h3>Catch the Stars</h3>
+      <p>Click falling stars fast! ✨</p>
+      <a href="catchstars.html" class="btn">Catch Stars</a>
+    </div>
+
+    <div class="card">
+      <i class="fas fa-calculator"></i>
+      <h3>Math Quiz</h3>
+      <p>Test your addition & subtraction 🧮</p>
+      <a href="mathquiz.html" class="btn">Start Quiz</a>
+    </div>
+  </div>
+
+  <script>
+    // Floating particles
+    function createParticle() {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 4 + 1;
+      p.style.width = p.style.height = `${size}px`;
+      p.style.left = `${Math.random() * 100}vw`;
+      p.style.animationDuration = `${Math.random() * 20 + 20}s`;
+      p.style.animationDelay = `${Math.random() * 5}s`;
+      document.querySelector('.particles').appendChild(p);
+      setTimeout(() => p.remove(), 30000);
+    }
+
+    setInterval(createParticle, 400);
+  </script>
 </body>
 </html>

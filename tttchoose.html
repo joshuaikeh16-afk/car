@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Choose Your Tic-Tac-Toe Game • Naija Vibes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0a0015;
+      --glass: rgba(20, 10, 45, 0.7);
+      --accent: #ff2e63;
+      --accent-glow: rgba(255, 46, 99, 0.5);
+      --bot: #7b2cff;
+      --friend: #00ff9d;
+      --text: #f0e6ff;
+      --text-dim: #b0a0d0;
+      --border: rgba(255,255,255,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: 
+        radial-gradient(circle at 15% 85%, #ff2e6322 0%, transparent 50%),
+        radial-gradient(circle at 85% 15%, #7b2cff22 0%, transparent 50%);
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--accent), var(--bot), var(--friend));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(255,46,99,0.4);
+      text-align: center;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-dim);
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .choice-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1000px;
+    }
+
+    .choice-card {
+      width: 320px;
+      padding: 40px 30px;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .choice-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.8),
+                  0 0 50px var(--accent-glow);
+    }
+
+    .choice-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,46,99,0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    .choice-card:hover::before {
+      opacity: 1;
+    }
+
+    .icon {
+      font-size: 5.5rem;
+      margin-bottom: 25px;
+      background: linear-gradient(90deg, var(--accent), var(--bot));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transition: transform 0.4s;
+    }
+
+    .choice-card:hover .icon {
+      transform: scale(1.15) rotate(8deg);
+    }
+
+    .choice-card h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .choice-card p {
+      color: var(--text-dim);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      background: linear-gradient(135deg, var(--accent), #ff6b6b);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      box-shadow: 0 8px 25px rgba(255,46,99,0.4);
+    }
+
+    .btn.bot {
+      background: linear-gradient(135deg, var(--bot), #00ff9d);
+      box-shadow: 0 8px 25px rgba(123,44,255,0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(255,46,99,0.6);
+    }
+
+    .btn.bot:hover {
+      box-shadow: 0 15px 40px rgba(123,44,255,0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .choice-card {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @media (max-width: 800px) {
+      .choice-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      .choice-card {
+        width: 90%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      h1 { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choose Your Opponent</h1>
+  <p class="subtitle">Play Tic-Tac-Toe — solo vs bot or with a friend ❌⭕</p>
+
+  <div class="choice-container">
+    <!-- Play with Bot -->
+    <div class="choice-card" onclick="window.location.href='tttbot.html'">
+      <div class="icon"><i class="fas fa-robot"></i></div>
+      <h2>Play with Bot</h2>
+      <p>Challenge a smart bot — good luck winning! 😏</p>
+      <a href="tttbot.html" class="btn bot">Start vs Bot</a>
+    </div>
+
+    <!-- Play with Friend -->
+    <div class="choice-card" onclick="window.location.href='tttfriend.html'">
+      <div class="icon"><i class="fas fa-user-friends"></i></div>
+      <h2>Play with Friend</h2>
+      <p>Pass the phone or share screen — real vibes only 🔥</p>
+      <a href="tictactoe.html"><div class="btn">Start vs Friend</div></a>
+    </div>
+  </div>
+
+  <script>
+    // Optional: subtle hover sound or animation trigger (if you want later)
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Math Quiz</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    background: linear-gradient(to bottom, #e3f2fd, #bbdefb); 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+  }
+  h1 { color: #1976d2; }
+  #question { font-size: 2.5rem; margin: 30px; }
+  input, button { 
+    font-size: 1.8rem; 
+    padding: 12px 24px; 
+    margin: 15px; 
+    border-radius: 12px; 
+  }
+  button { 
+    background: #1976d2; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+  }
+  #result { font-size: 2rem; margin: 30px; font-weight: bold; min-height: 50px; }
+  .menu-btn {
+    background: #4caf50;
+    padding: 14px 30px;
+    font-size: 1.2rem;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 40px;
+  }
+  .menu-btn:hover { background: #388e3c; }
+</style>
+</head>
+<body>
+<h1>Math Quiz – Easy Addition & Subtraction</h1>
+<div id="question"></div>
+<input type="number" id="answer" placeholder="Your answer">
+<button onclick="checkAnswer()">Check</button>
+<div id="result"></div>
+
+<button class="menu-btn" onclick="window.location.href='index.html'">← Return to Menu</button>
+
+<script>
+  let num1, num2, correctAnswer;
+
+  function newQuestion() {
+    const type = Math.random() < 0.5 ? '+' : '-';
+    num1 = Math.floor(Math.random() * 50) + 1;
+    num2 = Math.floor(Math.random() * 50) + 1;
+
+    if (type === '-') {
+      if (num2 > num1) [num1, num2] = [num2, num1];
+    }
+
+    correctAnswer = type === '+' ? num1 + num2 : num1 - num2;
+    document.getElementById('question').textContent = `${num1} ${type} ${num2} = ?`;
+    document.getElementById('answer').value = '';
+    document.getElementById('result').textContent = '';
+  }
+
+  function checkAnswer() {
+    const userAnswer = Number(document.getElementById('answer').value);
+    if (userAnswer === correctAnswer) {
+      document.getElementById('result').textContent = 'Correct! 🎉';
+      document.getElementById('result').style.color = '#388e3c';
+    } else {
+      document.getElementById('result').textContent = `Wrong! It's ${correctAnswer} 😔`;
+      document.getElementById('result').style.color = '#d32f2f';
+    }
+    setTimeout(newQuestion, 1800);
+  }
+
+  newQuestion();
+</script>
+</body>
+</html>

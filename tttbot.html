@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic-Tac-Toe • Play with Bot</title>
+  <style>
+    :root {
+      --bg: #0f001a;
+      --board: #1a0033;
+      --cell: rgba(40, 20, 80, 0.6);
+      --x: #ff2e63;
+      --o: #00ff9d;
+      --text: #f0e6ff;
+      --glow: rgba(255, 46, 99, 0.4);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: radial-gradient(circle at 10% 80%, #ff2e6322, transparent 40%);
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff2e63, #00ff9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px var(--glow);
+    }
+
+    #status {
+      font-size: 1.4rem;
+      margin: 20px 0;
+      min-height: 2rem;
+      color: #ffdd57;
+    }
+
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 120px);
+      grid-gap: 12px;
+      background: var(--board);
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    }
+
+    .cell {
+      width: 120px;
+      height: 120px;
+      background: var(--cell);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid rgba(255,255,255,0.08);
+    }
+
+    .cell:hover {
+      background: rgba(60, 40, 120, 0.8);
+      transform: scale(1.05);
+    }
+
+    .cell.x { color: var(--x); text-shadow: 0 0 15px var(--x); }
+    .cell.o { color: var(--o); text-shadow: 0 0 15px var(--o); }
+
+    #restart {
+      margin-top: 30px;
+      padding: 14px 32px;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, #ff2e63, #7b2cff);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255,46,99,0.4);
+      transition: all 0.3s;
+    }
+
+    #restart:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 35px rgba(255,46,99,0.6);
+    }
+
+    @media (max-width: 500px) {
+      #board {
+        grid-template-columns: repeat(3, 100px);
+      }
+      .cell {
+        width: 100px;
+        height: 100px;
+        font-size: 3.8rem;
+      }
+      h1 { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tic-Tac-Toe</h1>
+  <div id="status">Your turn (X)</div>
+
+  <div id="board">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+  </div>
+
+  <button id="restart">Play Again</button>
+
+  <script>
+    const cells = document.querySelectorAll('.cell');
+    const status = document.getElementById('status');
+    const restartBtn = document.getElementById('restart');
+
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let currentPlayer = 'X';
+    let gameActive = true;
+
+    const winningCombinations = [
+      [0,1,2], [3,4,5], [6,7,8], // rows
+      [0,3,6], [1,4,7], [2,5,8], // columns
+      [0,4,8], [2,4,6]           // diagonals
+    ];
+
+    // Check if someone won
+    function checkWinner() {
+      for (let combo of winningCombinations) {
+        const [a, b, c] = combo;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          return board[a];
+        }
+      }
+      if (!board.includes('')) return 'draw';
+      return null;
+    }
+
+    // Bot move (simple unbeatable logic)
+    function botMove() {
+      // 1. Win if possible
+      for (let i = 0; i < 9; i++) {
+        if (board[i] === '') {
+          board[i] = 'O';
+          if (checkWinner() === 'O') return i;
+          board[i] = '';
+        }
+      }
+
+      // 2. Block player win
+      for (let i = 0; i < 9; i++) {
+        if (board[i] === '') {
+          board[i] = 'X';
+          if (checkWinner() === 'X') {
+            board[i] = 'O';
+            return i;
+          }
+          board[i] = '';
+        }
+      }
+
+      // 3. Take center if available
+      if (board[4] === '') return 4;
+
+      // 4. Take corner
+      const corners = [0,2,6,8];
+      for (let c of corners) {
+        if (board[c] === '') return c;
+      }
+
+      // 5. Any remaining
+      for (let i = 0; i < 9; i++) {
+        if (board[i] === '') return i;
+      }
+    }
+
+    // Handle player click
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (board[index] !== '' || !gameActive || currentPlayer !== 'X') return;
+
+      board[index] = 'X';
+      e.target.classList.add('x');
+      e.target.textContent = 'X';
+
+      const winner = checkWinner();
+      if (winner) {
+        gameActive = false;
+        if (winner === 'draw') {
+          status.textContent = "It's a draw! 🤝";
+        } else {
+          status.textContent = `${winner} wins! 🎉`;
+        }
+        return;
+      }
+
+      currentPlayer = 'O';
+      status.textContent = "Bot thinking...";
+
+      setTimeout(() => {
+        const botIndex = botMove();
+        board[botIndex] = 'O';
+        cells[botIndex].classList.add('o');
+        cells[botIndex].textContent = 'O';
+
+        const winner = checkWinner();
+        if (winner) {
+          gameActive = false;
+          if (winner === 'draw') {
+            status.textContent = "It's a draw! 🤝";
+          } else {
+            status.textContent = "Bot wins! 😏";
+          }
+        } else {
+          currentPlayer = 'X';
+          status.textContent = "Your turn (X)";
+        }
+      }, 600);
+    }
+
+    // Restart game
+    function restart() {
+      board = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = 'X';
+      gameActive = true;
+      status.textContent = "Your turn (X)";
+
+      cells.forEach(cell => {
+        cell.textContent = '';
+        cell.className = 'cell';
+      });
+    }
+
+    // Event listeners
+    cells.forEach(cell => cell.addEventListener('click', handleClick));
+    restartBtn.addEventListener('click', restart);
+
+    // Welcome
+    status.textContent = "Your turn (X)";
+  </script>
+</body>
+</html>
