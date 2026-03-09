@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Guess the Number</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    background: linear-gradient(to bottom, #a1c4fd, #c2e9fb); 
+    height: 100vh; 
+    margin: 0; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    color: #333; 
+  }
+  h1 { color: #d32f2f; }
+  #info { font-size: 1.3rem; margin: 20px; }
+  input, button { 
+    font-size: 1.4rem; 
+    padding: 12px 20px; 
+    margin: 10px; 
+    border-radius: 12px; 
+    border: 2px solid #1976d2; 
+  }
+  button { 
+    background: #1976d2; 
+    color: white; 
+    cursor: pointer; 
+  }
+  button:hover { background: #1565c0; }
+  #message { font-size: 1.6rem; font-weight: bold; min-height: 40px; margin: 20px; }
+  .menu-btn {
+    background: #4caf50;
+    border: none;
+    padding: 14px 30px;
+    font-size: 1.2rem;
+    color: white;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 30px;
+  }
+  .menu-btn:hover { background: #388e3c; }
+</style>
+</head>
+<body>
+<h1>Guess the Number!</h1>
+<p id="info">I'm thinking of a number between 1 and 100</p>
+<input type="number" id="guess" placeholder="Your guess..." min="1" max="100">
+<button onclick="checkGuess()">Guess!</button>
+<div id="message"></div>
+
+<button class="menu-btn" onclick="window.location.href='index.html'">← Return to Menu</button>
+
+<script>
+  const secret = Math.floor(Math.random() * 100) + 1;
+  let attempts = 0;
+
+  function checkGuess() {
+    const guess = Number(document.getElementById("guess").value);
+    const msg = document.getElementById("message");
+    attempts++;
+
+    if (!guess || guess < 1 || guess > 100) {
+      msg.textContent = "Please enter a number between 1 and 100 😊";
+      msg.style.color = "#d32f2f";
+      return;
+    }
+
+    if (guess === secret) {
+      msg.textContent = `🎉 Yes! You got it in ${attempts} tries!`;
+      msg.style.color = "#388e3c";
+      document.getElementById("guess").disabled = true;
+    } else if (guess < secret) {
+      msg.textContent = "Too low! Try higher ↑";
+      msg.style.color = "#1976d2";
+    } else {
+      msg.textContent = "Too high! Try lower ↓";
+      msg.style.color = "#1976d2";
+    }
+
+    document.getElementById("guess").value = "";
+  }
+</script>
+</body>
+</html
