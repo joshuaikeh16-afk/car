@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Choose Your Ride • Cars or Bikes</title>
+  <style>
+    :root {
+      --bg: #0a0a1a;
+      --card: #141426;
+      --accent: #00d4ff;
+      --accent-dark: #0099cc;
+      --text: #e0f0ff;
+      --border: #1e3a5f;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: #a0c0ff;
+      max-width: 600px;
+    }
+
+    .choice-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .choice-card {
+      width: 100%;
+      max-width: 380px;
+      height: 280px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.35s ease;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+    .choice-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 60px rgba(0,212,255,0.3);
+      border-color: var(--accent);
+    }
+
+    .icon {
+      font-size: 9rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      text-shadow: 0 0 25px rgba(0,212,255,0.5);
+    }
+
+    .title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .desc {
+      font-size: 1.1rem;
+      color: #a0c0ff;
+      max-width: 80%;
+    }
+
+    footer {
+      margin-top: 80px;
+      color: #5a7db8;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .choice-container {
+        flex-direction: column;
+        gap: 30px;
+      }
+      .choice-card {
+        height: 260px;
+      }
+      h1 { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Choose Your Ride</h1>
+    <p class="subtitle">Explore the world of high-performance cars or powerful bikes</p>
+  </header>
+
+  <div class="choice-container">
+    <!-- Cars -->
+    <div class="choice-card" onclick="window.location.href='learn.html'">
+      <div class="icon">🚗</div>
+      <div class="title">EXPLORE CARS</div>
+      <div class="desc">Supercars, classics, hypercars, SUVs & more</div>
+    </div>
+
+    <!-- Bikes -->
+    <div class="choice-card" onclick="window.location.href='bikes.html'">
+      <div class="icon">🏍️</div>
+      <div class="title">EXPLORE BIKES</div>
+      <div class="desc">Sport bikes, cruisers, adventure, electric & superbikes</div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Velocity Vault • Choose your adventure
+  </footer>
+
+</body>
+</html>

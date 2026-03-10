@@ -3,181 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITALY MACHINES | Pure Passion</title>
+    <title>ITALY MACHINES | L'Arte della Velocità</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Montserrat:wght@300;400;900&display=swap');
+
         :root {
-            --ita-green: #008C45;
-            --ita-white: #F4F5F0;
-            --ita-red: #CD212A;
-            --dark-carbon: #1a1a1a;
+            --rosso-corsa: #d40000;
+            --carbon: #111111;
+            --gold: #c5a059;
+            --white: #ffffff;
+            --soft-bg: #f8f8f8;
         }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Vertical stripes feel more like the actual Italian Flag */
-            background: linear-gradient(
-                to right,
-                var(--ita-green) 0%,
-                var(--ita-green) 33.33%,
-                var(--ita-white) 33.33%,
-                var(--ita-white) 66.66%,
-                var(--ita-red) 66.66%,
-                var(--ita-red) 100%
-            );
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: var(--soft-bg);
+            color: var(--carbon);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
         }
 
-        .content {
-            max-width: 950px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border-top: 8px solid var(--ita-green);
-            border-bottom: 8px solid var(--ita-red);
+        /* Hero Section with Parallax Vibe */
+        header {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1592193331586-20157071c93a?auto=format&fit=crop&q=80&w=2000') center/cover;
+            color: var(--white);
+            clip-path: ellipse(150% 100% at 50% 0%);
         }
 
         h1 {
-            text-align: center;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--dark-carbon);
-            margin-top: 0;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
         }
 
-        p {
+        .tricolore-line {
+            display: flex;
+            width: 120px;
+            height: 4px;
+            margin-bottom: 20px;
+        }
+        .tricolore-line .g { background: #008C45; flex: 1; }
+        .tricolore-line .w { background: #fff; flex: 1; }
+        .tricolore-line .r { background: #CD212A; flex: 1; }
+
+        header p {
+            font-family: 'Playfair Display', serif;
             font-style: italic;
-            line-height: 1.6;
-            color: #444;
-            text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
+            color: var(--gold);
         }
 
-        ul {
+        .container {
+            max-width: 1100px;
+            margin: -100px auto 100px;
+            padding: 0 20px;
+        }
+
+        /* Card Section */
+        .philosophy-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 0;
-            list-style: none;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
         }
 
-        li {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            border-left: 4px solid var(--ita-red);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        .info-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border-bottom: 4px solid var(--white);
+            transition: all 0.4s ease;
         }
 
-        /* --- Luxury Table Styling --- */
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--rosso-corsa);
+        }
+
+        .info-card i {
+            color: var(--rosso-corsa);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Showroom Specs Table */
+        .specs-wrapper {
+            background: var(--carbon);
+            color: var(--white);
+            padding: 60px 40px;
+            border-radius: 2px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .specs-wrapper h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 30px auto;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid #ddd;
+            border-collapse: collapse;
         }
 
         th {
-            background-color: var(--dark-carbon);
-            color: white;
+            text-align: left;
             padding: 20px;
+            border-bottom: 1px solid #333;
+            color: var(--gold);
+            font-size: 0.8rem;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         td {
-            padding: 15px;
-            background-color: #fff;
-            border-bottom: 1px solid #eee;
-            transition: 0.3s;
+            padding: 25px 20px;
+            border-bottom: 1px solid #222;
+            font-weight: 300;
         }
 
-        tr:last-child td {
-            border-bottom: none;
-            font-weight: bold;
-            color: var(--ita-red);
+        .model-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--white);
         }
 
-        /* Hover Effect: The "Rosso Corsa" Glow */
-        td:hover {
-            background-color: #fff5f5;
-            color: var(--ita-red);
-            cursor: default;
+        .highlight-stat {
+            color: var(--rosso-corsa);
+            font-weight: 900;
         }
 
-        .spec-label {
-            font-weight: bold;
-            background-color: #f9f9f9 !important;
-            text-align: left;
-            width: 20%;
+        tr:hover td {
+            background: rgba(255,255,255,0.02);
+        }
+
+        /* Back Button */
+        .btn-portal {
+            display: inline-block;
+            margin-top: 60px;
+            padding: 20px 50px;
+            background: var(--rosso-corsa);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.75rem;
+            transition: all 0.3s;
+        }
+
+        .btn-portal:hover {
+            background: var(--white);
+            color: var(--rosso-corsa);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            header { height: 50vh; }
+            .container { margin-top: -50px; }
+            .specs-wrapper { padding: 30px 15px; }
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>ITALY MACHINES</h1>
-        <p>"The engine is the heart of an airplane, but the pilot is its soul." — *Enzo Ferrari*</p>
-        
-        <ul>
-            <li><strong>Artistic Design</strong>: Sculpted lines that prioritize emotion over utility.</li>
-            <li><strong>Raw Passion</strong>: An acoustic symphony from high-revving V12 engines.</li>
-            <li><strong>Performance</strong>: Blistering track times met with unparalleled style.</li>
-        </ul>
 
-        <table>
-            <tr>
-                <th class="spec-label">MODEL</th>
-                <th>LaFerrari</th>
-                <th>Aventador SVJ</th>
-                <th>Ghibli Trofeo</th>
-            </tr>
-            <tr>
-                <td class="spec-label">Top Speed</td>
-                <td>350+ km/h</td>
-                <td>352 km/h</td>
-                <td>326 km/h</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Engine</td>
-                <td>6.3L V12 Hybrid</td>
-                <td>6.5L V12</td>
-                <td>3.8L V8</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Drivetrain</td>
-                <td>RWD</td>
-                <td>AWD</td>
-                <td>RWD</td>
-            </tr>
-            <tr>
-                <td class="spec-label">0-100 km/h</td>
-                <td>2.9s</td>
-                <td>2.8s</td>
-                <td>4.3s</td>
-            </tr>
-            <tr>
-                <td class="spec-label">Price (Est.)</td>
-                <td>$3,500,000+</td>
-                <td>$517,000</td>
-                <td>$120,000</td>
-            </tr>
-        </table>
+    <header>
+        <h1>ITALIA</h1>
+        <div class="tricolore-line">
+            <div class="g"></div>
+            <div class="w"></div>
+            <div class="r"></div>
+        </div>
+        <p>L'Arte della Velocità</p>
+    </header>
+
+    <div class="container">
+        <div class="philosophy-grid">
+            <div class="info-card">
+                <i class="fas fa-pencil-alt"></i>
+                <h3>Sculpted Design</h3>
+                <p>Italian machines are not manufactured; they are born from the hands of artisans who treat aerodynamics as a form of fine art.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-music"></i>
+                <h3>The Symphony</h3>
+                <p>A high-revving Italian V12 is often cited as the greatest mechanical orchestra ever conducted. Pure acoustic emotion.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-crown"></i>
+                <h3>Exclusive Pedigree</h3>
+                <p>Owning an Italian supercar is an entry into a legacy of racing dominance dating back to the first Grand Prix.</p>
+            </div>
+        </div>
+
+        <div class="specs-wrapper">
+            <h2>IL GARAGE</h2>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Performance Specification</th>
+                            <th class="model-name">LaFerrari</th>
+                            <th class="model-name">Aventador SVJ</th>
+                            <th class="model-name">Ghibli Trofeo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Power Unit</td>
+                            <td>6.3L V12 Hybrid</td>
+                            <td>6.5L V12 (N/A)</td>
+                            <td>3.8L V8 Twin-Turbo</td>
+                        </tr>
+                        <tr>
+                            <td>Top Speed</td>
+                            <td class="highlight-stat">350+ KM/H</td>
+                            <td class="highlight-stat">352 KM/H</td>
+                            <td>326 KM/H</td>
+                        </tr>
+                        <tr>
+                            <td>0-100 KM/H</td>
+                            <td>2.9s</td>
+                            <td>2.8s</td>
+                            <td>4.3s</td>
+                        </tr>
+                        <tr>
+                            <td>Heritage Drive</td>
+                            <td>RWD</td>
+                            <td>AWD</td>
+                            <td>RWD</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-portal">Back to Research Portal</a>
+        </div>
     </div>
+
 </body>
 </html>

@@ -123,9 +123,9 @@
     <div class="age">
         <h3>User Credentials</h3>
         <form id="ageform"> 
-            <input type="text" id="name" placeholder="Driver Name" required>
+            <input type="text" id="name" placeholder="Arcader Name" required>
             <input type="number" id="age" placeholder="Age" required>
-            <button type="submit" id="hp">Start Engine</button>
+            <button type="submit" id="hp">Start Adventure</button>
         </form>
     </div>
 </div>
@@ -136,11 +136,11 @@ document.getElementById("ageform").addEventListener("submit", function(e) {
     const name = document.getElementById("name").value;
     const age = parseInt(document.getElementById("age").value);
     
-    if (age >= 18 && age <= 60) {
+    if (age >= 15 && age <= 60) {
         window.location.href = "choose.html";
-    } else if (age < 18) {
-        alert("Hold your horses, " + name + "! You must be at least 18 to enter the garage.");
-            window.location.href = "under18.html";
+    } else if (age < 15) {
+        alert("Hold your horses, " + name + "! You must be at least 15 to enter the garage.");
+         window.location.href = "under18.html";
     } else if (age > 60) {
         alert("Sorry " + name + ", this experience is optimized for drivers under 60.");
     } else {

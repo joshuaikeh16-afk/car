@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anime Genres Guide • For Beginners</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0f0c1f;
+      --card: rgba(30, 25, 60, 0.75);
+      --accent: #ff2e63;
+      --glow: rgba(255, 46, 99, 0.45);
+      --text: #f0e6ff;
+      --text-dim: #b0a0d0;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 80%, #ff2e6322 0%, transparent 50%),
+        radial-gradient(circle at 90% 20%, #7b2cff22 0%, transparent 50%);
+    }
+
+    header {
+      padding: 30px 20px;
+      text-align: center;
+      background: linear-gradient(to bottom, rgba(30,20,70,0.9), transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 3rem;
+      background: linear-gradient(90deg, #ff2e63, #7b2cff, #00ff9d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 25px var(--glow);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-dim);
+      margin-bottom: 40px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .genre-card {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+      transition: all 0.4s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .genre-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 50px var(--glow);
+    }
+
+    .genre-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 4px solid var(--accent);
+    }
+
+    .genre-content {
+      padding: 25px;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .genre-title {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .genre-desc {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-dim);
+      margin-bottom: 25px;
+      flex-grow: 1;
+    }
+
+    /* Base style for ALL buttons */
+    .btn, .genre-btn {
+      display: inline-block;
+      padding: 14px 40px;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .genre-btn {
+      background: linear-gradient(135deg, var(--accent), #ff6b6b);
+      box-shadow: 0 8px 25px rgba(255,46,99,0.4);
+    }
+
+    .btn:hover, .genre-btn:hover {
+      transform: translateY(-4px);
+      filter: brightness(1.1);
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.4rem; }
+      .genre-card { max-width: 380px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Anime Genres Guide</h1>
+    <p class="subtitle">Perfect for newcomers — discover what anime style suits you! 🎬✨</p>
+  </header>
+
+  <div class="container">
+    <div class="genre-grid">
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Romance 💕</div>
+          <p class="genre-desc">Heart-fluttering love stories, crushes, confessions, and sweet relationships. Perfect for emotional moments.</p>
+          <a href="https://myanimelist.net/anime/genre/22/Romance" target="_blank" class="genre-btn">Explore Romance →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Action ⚔️</div>
+          <p class="genre-desc">Explosions, fights, superpowers, and high-energy adventures. Great if you love fast-paced excitement.</p>
+          <a href="https://myanimelist.net/anime/genre/1/Action" target="_blank" class="genre-btn">Explore Action →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Fantasy 🧙‍♂️</div>
+          <p class="genre-desc">Magic, dragons, other worlds, and epic quests. Perfect if you love imagination and adventure.</p>
+          <a href="https://myanimelist.net/anime/genre/10/Fantasy" target="_blank" class="genre-btn">Explore Fantasy →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Sci-Fi 🚀</div>
+          <p class="genre-desc">Space, robots, and futuristic worlds. Great if you like deep ideas and high technology.</p>
+          <a href="https://myanimelist.net/anime/genre/24/Sci-Fi" target="_blank" class="genre-btn">Explore Sci-Fi →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Slice of Life ☕</div>
+          <p class="genre-desc">Everyday life, school, and friendship. Perfect if you want relaxing, heartwarming vibes.</p>
+          <a href="https://myanimelist.net/anime/genre/36/Slice_of_Life" target="_blank" class="genre-btn">Explore Slice of Life →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Comedy 😂</div>
+          <p class="genre-desc">Laugh-out-loud jokes and silly situations. Great if you just want to smile and have fun.</p>
+          <a href="https://myanimelist.net/anime/genre/4/Comedy" target="_blank" class="genre-btn">Explore Comedy →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Mystery 🕵️</div>
+          <p class="genre-desc">Secrets, detectives, and plot twists. Perfect if you love suspense and figuring things out.</p>
+          <a href="https://myanimelist.net/anime/genre/7/Mystery" target="_blank" class="genre-btn">Explore Mystery →</a>
+        </div>
+      </div>
+
+      <div class="genre-card">
+        <div class="genre-content">
+          <div class="genre-title">Horror 😱</div>
+          <p class="genre-desc">Ghosts, monsters, and psychological fear. Not for the faint-hearted!</p>
+          <a href="https://myanimelist.net/anime/genre/14/Horror" target="_blank" class="genre-btn">Explore Horror →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center; margin-top: 60px;">
+      <a href="anime-list.html" class="btn" style="background: linear-gradient(135deg, #9b5de5, #f15bb5); box-shadow: 0 8px 25px rgba(155,93,229,0.5);">
+        Explore More Anime Genres →
+      </a>
+      <br><br>
+      <a href="choose.html" class="btn" style="background: linear-gradient(135deg, #7b2cff, #00ff9d); box-shadow: 0 8px 25px rgba(123,44,255,0.4);">
+        ← Back to Main Menu
+      </a>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('.genre-card').forEach((el, i) => {
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(30px)';
+      setTimeout(() => {
+        el.style.transition = 'all 0.7s ease';
+        el.style.opacity = 1;
+        el.style.transform = 'translateY(0)';
+      }, i * 150);
+    });
+  </script>
+</body>
+</html>

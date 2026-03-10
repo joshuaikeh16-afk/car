@@ -12,6 +12,7 @@
       --accent: #ff2e63;
       --accent-glow: rgba(255, 46, 99, 0.5);
       --secondary: #7b2cff;
+      --anime-glow: rgba(139, 0, 255, 0.6); /* Purple for anime */
       --text: #f0e6ff;
       --text-dim: #b0a0d0;
       --border: rgba(255,255,255,0.08);
@@ -123,11 +124,7 @@
     }
 
     .btn {
-        
-     position: relative; /* Add this */
-     z-index: 10;        /* Add this */
-     display: inline-block;
-     display: inline-block;
+      display: inline-block;
       padding: 14px 32px;
       background: linear-gradient(135deg, var(--accent), #ff6b6b);
       color: white;
@@ -137,9 +134,9 @@
       font-size: 1.1rem;
       transition: all 0.3s;
       box-shadow: 0 8px 25px rgba(255,46,99,0.35);
-}
-      
-    
+      position: relative;
+      z-index: 10;
+    }
 
     .btn:hover {
       transform: translateY(-3px);
@@ -153,6 +150,17 @@
 
     .btn-game:hover {
       box-shadow: 0 15px 40px rgba(40,167,69,0.6);
+    }
+
+    /* Anime button special style */
+    .btn-anime {
+      background: linear-gradient(135deg, #9b5de5, #f15bb5);
+      box-shadow: 0 8px 25px rgba(155,93,229,0.4);
+    }
+
+    .btn-anime:hover {
+      box-shadow: 0 15px 40px rgba(155,93,229,0.6);
+      transform: translateY(-3px);
     }
 
     /* Floating particles */
@@ -210,9 +218,9 @@
 
     <div class="card">
       <i class="fas fa-car-side"></i>
-      <h3>Car Zone</h3>
+      <h3>Motor Zone</h3>
       <p>Explore rides & speed 🏎️</p>
-      <a href="learn.html" class="btn">Check Cars</a>
+      <a href="carchoose.html" class="btn">Check Cars</a>
     </div>
 
     <div class="card">
@@ -243,7 +251,7 @@
       <a href="chatbox.html" class="btn">Start Chat</a>
     </div>
 
-    <!-- Mini-games added -->
+    <!-- Mini-games -->
     <div class="card">
       <i class="fas fa-dice"></i>
       <h3>Guess the Number</h3>
@@ -266,10 +274,18 @@
     </div>
 
     <div class="card">
-        <i class="fas fa-calculator"></i>
+      <i class="fas fa-calculator"></i>
       <h3>Math Quiz</h3>
       <p>Test your addition & subtraction 🧮</p>
       <a href="mathquiz.html" class="btn">Start Quiz</a>
+    </div>
+
+    <!-- New Anime Section -->
+    <div class="card">
+      <i class="fas fa-film" style="background: linear-gradient(90deg, #9b5de5, #f15bb5);"></i>
+      <h3>ANIME ZONE</h3>
+      <p>Watch, discover & vibe with anime 🔥</p>
+      <a href="anime.html" class="btn btn-anime" style="background: linear-gradient(135deg, #9b5de5, #f15bb5); box-shadow: 0 8px 25px rgba(155,93,229,0.4);">Enter Anime</a>
     </div>
   </div>
 

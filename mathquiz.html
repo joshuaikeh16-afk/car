@@ -1,86 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Math Quiz</title>
-<style>
-  body { 
-    font-family: Arial, sans-serif; 
-    text-align: center; 
-    background: linear-gradient(to bottom, #e3f2fd, #bbdefb); 
-    min-height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-  }
-  h1 { color: #1976d2; }
-  #question { font-size: 2.5rem; margin: 30px; }
-  input, button { 
-    font-size: 1.8rem; 
-    padding: 12px 24px; 
-    margin: 15px; 
-    border-radius: 12px; 
-  }
-  button { 
-    background: #1976d2; 
-    color: white; 
-    border: none; 
-    cursor: pointer; 
-  }
-  #result { font-size: 2rem; margin: 30px; font-weight: bold; min-height: 50px; }
-  .menu-btn {
-    background: #4caf50;
-    padding: 14px 30px;
-    font-size: 1.2rem;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-top: 40px;
-  }
-  .menu-btn:hover { background: #388e3c; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Math Quiz • Naija Tech Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0a0015;
+      --glass: rgba(255, 255, 255, 0.05);
+      --accent: #00ff9d;
+      --text: #f0e6ff;
+      --error: #ff2e63;
+    }
+
+    body { 
+      font-family: 'Inter', system-ui, sans-serif; 
+      text-align: center; 
+      background: var(--bg); 
+      color: var(--text);
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      background-image: radial-gradient(circle at 50% 50%, #7b2cff15 0%, transparent 70%);
+    }
+
+    .quiz-card {
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 450px;
+    }
+
+    h1 { 
+      font-size: 1.8rem;
+      margin-top: 0;
+      background: linear-gradient(90deg, #00ff9d, #7b2cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    #score-board {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    #question { 
+      font-size: 3.5rem; 
+      margin: 20px 0; 
+      font-weight: 800;
+      text-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+    }
+
+    input { 
+      font-size: 1.5rem; 
+      padding: 15px; 
+      width: 150px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.1);
+      color: white;
+      border-radius: 15px; 
+      text-align: center;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus { border-color: var(--accent); }
+
+    .btn-check { 
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: var(--accent); 
+      color: #000; 
+      border: none; 
+      border-radius: 15px;
+      cursor: pointer; 
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-check:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 255, 157, 0.4);
+    }
+
+    #result { 
+      font-size: 1.3rem; 
+      margin-top: 25px; 
+      min-height: 30px;
+      font-weight: 600;
+    }
+
+    .menu-btn {
+      background: transparent;
+      color: #b0a0d0;
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 30px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .menu-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+
+    /* Animation for correct answer */
+    .pop { animation: pop 0.4s ease-out; }
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+  </style>
 </head>
 <body>
-<h1>Math Quiz – Easy Addition & Subtraction</h1>
-<div id="question"></div>
-<input type="number" id="answer" placeholder="Your answer">
-<button onclick="checkAnswer()">Check</button>
-<div id="result"></div>
 
-<button class="menu-btn" onclick="window.location.href='index.html'">← Return to Menu</button>
+  <div class="quiz-card" id="quiz-container">
+    <h1><i class="fas fa-brain"></i> Math Master</h1>
+    <div id="score-board">Streak: <span id="streak">0</span></div>
+    
+    <div id="question"></div>
+    
+    <input type="number" id="answer" placeholder="?" autocomplete="off">
+    <button class="btn-check" onclick="checkAnswer()">CHECK ANSWER</button>
+    
+    <div id="result"></div>
+  </div>
 
-<script>
-  let num1, num2, correctAnswer;
+  <a href="index.html" class="menu-btn">
+    <i class="fas fa-arrow-left"></i> Back to Hub
+  </a>
 
-  function newQuestion() {
-    const type = Math.random() < 0.5 ? '+' : '-';
-    num1 = Math.floor(Math.random() * 50) + 1;
-    num2 = Math.floor(Math.random() * 50) + 1;
+  <script>
+    let num1, num2, correctAnswer, streak = 0;
 
-    if (type === '-') {
-      if (num2 > num1) [num1, num2] = [num2, num1];
+    function newQuestion() {
+      const type = Math.random() < 0.5 ? '+' : '-';
+      num1 = Math.floor(Math.random() * 30) + 10; // Harder numbers
+      num2 = Math.floor(Math.random() * 20) + 1;
+
+      if (type === '-' && num2 > num1) {
+        [num1, num2] = [num2, num1];
+      }
+
+      correctAnswer = type === '+' ? num1 + num2 : num1 - num2;
+      document.getElementById('question').textContent = `${num1} ${type} ${num2}`;
+      document.getElementById('answer').value = '';
+      document.getElementById('answer').focus();
     }
 
-    correctAnswer = type === '+' ? num1 + num2 : num1 - num2;
-    document.getElementById('question').textContent = `${num1} ${type} ${num2} = ?`;
-    document.getElementById('answer').value = '';
-    document.getElementById('result').textContent = '';
-  }
+    function checkAnswer() {
+      const input = document.getElementById('answer');
+      const resultDiv = document.getElementById('result');
+      const userAnswer = Number(input.value);
 
-  function checkAnswer() {
-    const userAnswer = Number(document.getElementById('answer').value);
-    if (userAnswer === correctAnswer) {
-      document.getElementById('result').textContent = 'Correct! 🎉';
-      document.getElementById('result').style.color = '#388e3c';
-    } else {
-      document.getElementById('result').textContent = `Wrong! It's ${correctAnswer} 😔`;
-      document.getElementById('result').style.color = '#d32f2f';
+      if (input.value === "") return; // Don't check empty
+
+      if (userAnswer === correctAnswer) {
+        streak++;
+        resultDiv.textContent = 'Correct! 🔥';
+        resultDiv.style.color = '#00ff9d';
+        document.getElementById('quiz-container').classList.add('pop');
+        setTimeout(() => document.getElementById('quiz-container').classList.remove('pop'), 400);
+      } else {
+        streak = 0;
+        resultDiv.textContent = `Wrong! Answer was ${correctAnswer}`;
+        resultDiv.style.color = '#ff2e63';
+      }
+
+      document.getElementById('streak').textContent = streak;
+      
+      // Pause slightly so they see the result, then new question
+      setTimeout(newQuestion, 1200);
     }
-    setTimeout(newQuestion, 1800);
-  }
 
-  newQuestion();
-</script>
+    // Allow pressing "Enter" to submit
+    document.getElementById('answer').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') checkAnswer();
+    });
+
+    newQuestion();
+  </script>
 </body>
 </html>

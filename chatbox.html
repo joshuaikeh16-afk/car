@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naija Chatbox • Vibes Only</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0a0015;
+      --glass: rgba(20, 10, 45, 0.65);
+      --accent: #ff2e63;
+      --glow: rgba(255, 46, 99, 0.5);
+      --orb-idle: #7b2cff;
+      --orb-active: #ff2e63;
+      --text: #f0e6ff;
+      --text-dim: #b0a0d0;
+      --border: rgba(255,255,255,0.09);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 10% 80%, #ff2e6322 0%, transparent 50%),
+        radial-gradient(circle at 90% 20%, #7b2cff22 0%, transparent 50%);
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 480px;
+      height: 85vh;
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 16px;
+      background: rgba(30,20,70,0.85);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, #ff2e63, #7b2cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+
+    #messages {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.45;
+      font-size: 0.98rem;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #7b2cff, #ff2e63);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      border-bottom-left-radius: 4px;
+    }
+
+    .typing {
+      align-self: flex-start;
+      color: var(--text-dim);
+      font-style: italic;
+      padding: 10px 16px;
+      animation: pulse 1.5s infinite;
+    }
+
+    #input-area {
+      padding: 16px 20px;
+      background: rgba(15,5,35,0.95);
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(40,30,80,0.75);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    #user-input:focus {
+      background: rgba(60,50,100,0.9);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    #user-input::placeholder { color: #8888aa; }
+
+    #send-btn, #mic-btn {
+      width: 54px;
+      height: 54px;
+      border: none;
+      border-radius: 50%;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    #send-btn {
+      background: var(--accent);
+      color: white;
+    }
+
+    #mic-btn {
+      background: linear-gradient(135deg, #00ff9d, #7b2cff);
+      color: white;
+    }
+
+    #mic-btn.listening {
+      background: #ff2e63;
+      transform: scale(1.15);
+      box-shadow: 0 0 30px #ff2e63cc;
+    }
+
+    /* Floating orb */
+    #orb-wrapper {
+      position: fixed;
+      right: 40px;
+      bottom: 140px;
+      width: 180px;
+      height: 180px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    #galaxy-orb {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #0a0022 0%, #000 70%);
+      box-shadow: 
+        inset 0 0 80px #000,
+        0 0 80px #7b2cff66,
+        0 0 160px #00ff9d44,
+        0 0 240px #ff2e6333;
+      animation: orbRotate 35s linear infinite, orbFloat 10s ease-in-out infinite;
+      transition: all 0.6s ease;
+    }
+
+    #galaxy-orb.listening {
+      animation-duration: 6s, 3s;
+      box-shadow: 
+        inset 0 0 100px #000,
+        0 0 140px #ff2e63aa,
+        0 0 280px #f44336aa;
+      transform: scale(1.12);
+    }
+
+    @keyframes orbRotate {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(0, -20px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      #orb-wrapper { right: 20px; bottom: 120px; width: 140px; height: 140px; }
+      #chat-window { width: 94%; height: 88vh; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="chat-window">
+    <header>
+      <h1>Naija Chatbox</h1>
+    </header>
+
+    <div id="messages"></div>
+
+    <div id="input-area">
+      <input type="text" id="user-input" placeholder="Wetin dey sup?..." autocomplete="off"/>
+      <button id="mic-btn" title="Speak"><i class="fas fa-microphone"></i></button>
+      <button id="send-btn">➤</button>
+    </div>
+  </div>
+
+  <!-- Floating orb for voice (simulated) -->
+  <div id="orb-wrapper">
+    <div id="galaxy-orb"></div>
+  </div>
+
+  <script>
+    const messages = document.getElementById('messages');
+    const input = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const micBtn = document.getElementById('mic-btn');
+   
+
+    // Reply categories
+    const replies = {
+      greeting: [
+        "Hey boss! Wetin dey happen? 😎",
+        "Yo yo, Abuja vibes! 👋",
+        "Hello there! Oya talk",
+        "Hi! Chai, see fine person 🔥",
+        "Senior man, how far nah"
+      ],
+      thanks: [
+        "No wahala! Anytime 😄",
+        "You too much! 🙌",
+        "My pleasure o",
+        "Na you o! No stress"
+      ],
+      joke: [
+        "Why did the tomato turn red? Because it saw the salad dressing! 🍅",
+        "Person wey dey fear height no go climb ladder of success o",
+        "My Wi-Fi name na 'Get your own' 😂"
+      ],
+      love: [
+        "I'm really flattered o 😳",
+        "Do you really think so? 🥰",
+        "I can feel the heat 🔥"
+      ],
+      goodbye: [
+        "Oya na, later boss! 👋",
+        "Catch you later! Don't forget me o 😌",
+        "Bye for now! Hit me up anytime 🔥"
+      ],
+      default: [
+        "Hmm, interesting...",
+        "Ehen? Talk more na",
+        "I dey hear you...",
+        "Okay o, continue..."
+      ]
+    };
+
+    function addMsg(text, who = 'user') {
+      const div = document.createElement('div');
+      div.className = `message ${who}`;
+      div.textContent = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function showTyping(callback) {
+      const typing = document.createElement('div');
+      typing.className = 'typing';
+      typing.textContent = 'Bot is typing...';
+      messages.appendChild(typing);
+      messages.scrollTop = messages.scrollHeight;
+
+      setTimeout(() => {
+        typing.remove();
+        callback();
+      }, 800 + Math.random() * 1200);
+    }
+
+    function getReply(msg) {
+      const lower = msg.toLowerCase().trim();
+
+      if (/hi|hello|hey|good day|wetin|sup/.test(lower)) return replies.greeting;
+      if (/love|like you|cute|beautiful|sexy|fine|crush/.test(lower)) return replies.love;
+      if (/thanks|thank you|appreciate/.test(lower)) return replies.thanks;
+      if (/joke|funny|laugh|make laugh/.test(lower)) return replies.joke;
+      if (/bye|exit|stop|quit|goodbye|later/.test(lower)) return replies.goodbye;
+
+      return replies.default;
+    }
+
+    function sendMessage() {
+      const text = input.value.trim();
+      if (!text) return;
+
+      addMsg(text, 'user');
+      input.value = '';
+
+      if (/bye|exit|stop|quit/.test(text.toLowerCase())) {
+        showTyping(() => addMsg("Oya na, later boss! 👋", 'bot'));
+        input.disabled = true;
+        sendBtn.disabled = true;
+        micBtn.disabled = true;
+        return;
+      }
+
+      showTyping(() => {
+        const list = getReply(text);
+        const reply = list[Math.floor(Math.random() * list.length)];
+        addMsg(reply, 'bot');
+      });
+    }
+
+    input.addEventListener('keypress', e => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    // Simulated voice orb interaction (click orb to "speak")
+    const orb = document.getElementById('galaxy-orb');
+    orb.addEventListener('click', () => {
+      if (orb.classList.contains('listening')) {
+        orb.classList.remove('listening');
+      } else {
+        orb.classList.add('listening');
+        setTimeout(() => {
+          orb.classList.remove('listening');
+          // Simulate voice input (you can expand this later with real Speech API)
+          const fakeVoiceInputs = ["hi", "thanks", "tell me a joke", "bye"];
+          const randomInput = fakeVoiceInputs[Math.floor(Math.random() * fakeVoiceInputs.length)];
+          input.value = randomInput;
+          sendMessage();
+        }, 2000);
+      }
+    });
+
+    // Welcome
+    addMsg("Oya boss, wetin dey sup? 😎 Type or click the orb to vibe", 'bot');
+  </script>
+</body>
+</html>
